@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>CSS Template</title>
+<title>UNO Game</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -76,7 +76,32 @@ footer {
     height: auto;
   }
 }
+/*Different Cards */
+button[type]{
+	border: none;
+	padding: 30px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	background-color: white;
+}
+button[type=red]{
+	background-color: red;
+}
+button[type=green]{
+	background-color: green;
+}
+button[type=yellow]{
+	background-color: yellow;
+}
+button[type=blue]{
+	background-color: blue;
+}
+
 </style>
+
+
 </head>
 
 <body>
@@ -88,7 +113,7 @@ footer {
 <section>
 <playerside>
 	<p>Stack of Computer</p>
-	<table id="stack_computer">
+	<table id="computerstack">
 		<tr>
 			<td>Card 1</td>
 			<td>Card 2</td>
@@ -100,18 +125,20 @@ footer {
 
 <section>
   <board_pile>
-	<h2 id="top_card">Top Card</h2>
+	<h2 id="pile_text">Card Pile</h2>
+	<div id=pile_card></div>
   </board_pile>
   
   <board_stack>
-	<button id="takeCard">Take Card</button>
+	<h3 id="takeCard">Card Stack</h3>
+	<div id=stack></div>
   </board_stack>
 </section>
 
 <section>
 <playerside>
-	<p>Stack of Player</p>
-	<table id="stack_player">
+	<p id="playername">Stack of Player</p>
+	<table id="playerstack">
 		<tr>
 			<td>Card 1</td>
 			<td>Card 2</td>
@@ -125,5 +152,6 @@ footer {
   <p>Footer</p>
 </footer>
 
+	<script src="UNOGame.js"></script>
 </body>
 </html>
