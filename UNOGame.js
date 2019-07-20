@@ -21,7 +21,7 @@ function fillStack() {
     for (var i = 0; i < colors.length; i++) {
         for (var cardValue = 1; cardValue <= 9; cardValue++) {
             nCard = { value: cardValue.toString(), color: colors[i] };
-            console.log(nCard);
+            //console.log(nCard)
             cardStack.push(nCard);
         }
     }
@@ -40,8 +40,8 @@ function giveOutCards() {
         userStack.push(cardStack.pop());
         compStack.push(cardStack.pop());
     }
-    console.log(userStack);
-    console.log(compStack);
+    //console.log(userStack)
+    //console.log(compStack)
 }
 /*
  *  Pile Functions
@@ -56,6 +56,19 @@ function checkTurn(card) {
         return (false);
     }
 }
+function checkGameOver() {
+    if (userStack.length == 0) {
+        state == gameState.Won;
+        alert("You Won! :)");
+    }
+    else if (compStack.length == 0) {
+        state == gameState.Lost;
+        alert("You Lost! :(");
+    }
+}
+function addCard_Pile(card) {
+    cardPile.push(card);
+}
 /*
  *  Player/Computer Functions
  */
@@ -67,6 +80,63 @@ function removeCard(card, stack) {
             stack.splice(i, 1);
         }
     }
+}
+function playCard(card, stack) {
+    console.log("Play Card:");
+    console.log(card);
+    removeCard(card, stack);
+    addCard_Pile(card);
+    if (stack == userStack) {
+        state = gameState.ComputersDraw;
+    }
+    else {
+        state = gameState.PlayersDraw;
+    }
+    checkGameOver();
+    redrawBoard();
+}
+function takeCard(stack) {
+    if (state == gameState.PlayersDraw || state == gameState.ComputersDraw) {
+        stack.push(cardStack.pop());
+        if (state == gameState.PlayersDraw) {
+            state = gameState.ComputersDraw;
+            computersTurn();
+        }
+        else {
+            state = gameState.PlayersDraw;
+        }
+        redrawBoard();
+    }
+}
+function computersTurn() {
+    if (state == gameState.ComputersDraw) {
+        console.log("Computers Turn Began");
+        setTimeout(function () {
+            var cardIndex = compCheckCards();
+            console.log(cardIndex);
+            if (cardIndex == -1) {
+                compStack.push(cardStack.pop());
+                redrawBoard();
+                state = gameState.PlayersDraw;
+            }
+            else {
+                var card = { value: compStack[cardIndex].value, color: compStack[cardIndex].color };
+                playCard(card, compStack);
+            }
+            console.log("Computers Turn Over");
+        }, 2000);
+    }
+}
+function compCheckCards() {
+    var topCard = cardPile[cardPile.length - 1];
+    for (var i = 0; i < compStack.length; i++) {
+        if (compStack[i].color == topCard.color || compStack[i].value == topCard.value) {
+            console.log(topCard);
+            console.log(compStack[i]);
+            return i;
+        }
+    }
+    return -1;
 }
 /*
  *  Game Functions
@@ -83,20 +153,25 @@ function printPlayerStack() {
 function printComputerStack() {
     var html = "";
     var card;
-    for (var i = 0; i < compStack.length - 1; i++) {
+    for (var i = 0; i < compStack.length; i++) {
         card = compStack[i];
-        html += "<td><button type='backside'>X</button></td>";
+        if (state == gameState.Won || state == gameState.Lost) {
+            html += "<td><button type=\"" + card.color + "\">" + card.value + "</button></td>"; //Offen
+        }
+        else {
+            html += "<td><button type='backside'></button></td>"; //Verdeckt
+        }
     }
     document.getElementById("computerstack").innerHTML = html;
 }
 function printPile() {
     var card = cardPile[cardPile.length - 1];
-    console.log(cardPile[cardPile.length - 1]);
+    //console.log(cardPile[cardPile.length-1])
     var html = "<button type='" + card.color + "'>" + card.value + "</button>";
     document.getElementById("pile_card").innerHTML = html;
 }
 function printStack() {
-    var html = "<button onClick='takeCard()' type='backside'>X</button>";
+    var html = "<button onClick='cardStackClicked()' type='backside'></button>";
     if (cardStack.length > 0) {
         document.getElementById("stack").innerHTML = html;
     }
@@ -104,30 +179,32 @@ function printStack() {
         document.getElementById("stack").innerHTML = "";
     }
 }
+function redrawBoard() {
+    printPlayerStack();
+    printComputerStack();
+    printPile();
+    printStack();
+}
 /* Button Functions */
 function cardClicked(color, value) {
-    //if (state == gameState.PlayersDraw) {
-    //alert("Click! "+color+" "+value);
-    var clCard = { color: color, value: value };
-    if (checkTurn(clCard)) {
-        removeCard(clCard, userStack);
-        cardPile.push(clCard);
-        state = gameState.ComputersDraw;
-        printPlayerStack();
-        printPile();
+    if (state == gameState.PlayersDraw) {
+        var clCard = { color: color, value: value };
+        if (checkTurn(clCard)) {
+            playCard(clCard, userStack);
+            computersTurn();
+        }
+        else {
+            alert("You cant place this card");
+        }
     }
     else {
-        alert("You cant place this card");
+        alert("It's not your turn!");
     }
-    //} else {
-    //	alert("It's not your turn!");
-    //}
 }
-function takeCard() {
-    userStack.push(cardStack.pop());
-    printPlayerStack();
-    printStack();
-    state = gameState.ComputersDraw;
+function cardStackClicked() {
+    if (state == gameState.PlayersDraw) {
+        takeCard(userStack);
+    }
 }
 /* Initialize */
 fillStack();
