@@ -1,0 +1,209 @@
+/*Phone (h1 grün)*/
+h1{
+
+    font-family: Arial, Helvetica, left;
+    font-size: 8em;
+    max-width: 100%;
+    text-align: center;
+    border-style: dotted;
+    border-color: green;
+    border-width: 10px;
+    
+    }
+   
+main{
+    float: left;
+    width: 100%;
+    
+}
+    
+}
+ header{
+    clear: left;
+    text-align: center;
+    width: 100%;
+ }
+
+ 
+ul{
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    background-color: #99AABB; 
+    width: 100%;
+    z-index: 150;
+    height: 3em;
+    overflow: hidden;
+    position: absolute;
+
+}
+
+ul:hover{
+    height:30em;
+    
+}
+
+li{
+    color:black;
+    padding: 1%;
+    margin: 0;
+    font-size: 2em;
+    text-align: center;
+  
+}
+    li:hover{
+        background-color:#cc99ff, (60, 66, 71);
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+body{
+
+    background-color: #C1DEA5;
+    margin:0;
+
+    
+}
+
+
+
+
+article {
+    background-color: #cc99ff;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+img {
+
+    image height: 45%;
+    image width: 25%;
+    
+    
+    }
+    
+
+p {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1,5em;
+    text-align: left;
+    color: black;
+    text-align: left;
+
+    margin-top: 1.5em;
+    margin-right: 1em;
+    margin-bottom: 2.5em;
+    margin-left: 1em;
+    padding: 1.0em 1,5em 2.0em 1,0em; 
+}
+
+footer {
+
+text align: left;
+background-color: #cc99ff;
+font-family: 'Franklin Gothic Medium';
+font-size: 2,5em;
+max-width: 100%;
+clear:left;
+}
+
+header {
+    text-align: left;
+}
+
+
+
+
+
+aside{
+    width:100%;
+    overflow: auto;
+    clear:left;
+    background-color: #F04714;
+
+    
+    
+ 
+    
+}
+ div.Box{
+     background-color: #cc99ff;
+     color: black;
+     width:100%;
+     height:30em;
+     float: left;
+     overflow: scroll;
+     margin:0;
+     padding:0;
+     
+ }
+
+
+
+/*Tablet (h1 blau)*/
+@media screen and (min-width: 40em) {
+h1{
+
+    border-color: blue;
+}
+ul{
+    width: 25%;
+    margin-left:0%;
+    margin-right: 0%;
+}
+
+
+aside{
+    width: 25%;
+    margin-left:0%;
+    margin-right: 0%;
+    position: absolute;
+    clear: none;
+}
+
+main{
+    width: 75%;
+    margin-left:25%;
+    margin-right:0%;
+}
+
+div.Box{
+    width: 50%;
+    margin-left:0%;
+    margin-right:0%;
+}
+
+div.Box:nth-child(2n+1){
+    clear: left; 
+    }
+
+}
+    
+/*Desktop (h1 orange)*/
+@media screen and (min-width: 75em) {
+    h1{
+
+        border-color: #F04714;
+    }
+    div.Box{
+        width: 33.3%;
+        margin-left:0%;
+        margin-right:0%;
+    }
+
+    div.Box:nth-child(3n+1){
+        clear: left; 
+        }
+
+        div.Box:nth-child(2n+1){
+            clear: none; 
+            }
+             
+            
+        
+    }
+   
+   
+    

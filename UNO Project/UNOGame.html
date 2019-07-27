@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>UNO Game</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+/* leider gab es bei der einbindung des stylesheets Probleme und ich habe keine lösung dafür gefunden deshalb habe ich es hier eingefügt (ich weiß, pfui) */
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+header {
+  background-color: #666;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+playerside {
+float: left;
+width: 100%;
+  background: #866;
+  padding: 5px;
+  text-align: center;
+  color: black;
+}
+
+/* Erstellt Boxen die nebeneinander sind */
+board_pile {
+  float: left;
+  width: 50%;
+  height: 300px;
+  background: #ccc;
+  padding: 20px;
+}
+
+/* Style die liste im menü */
+board_pile ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+board_stack {
+  float: left;
+  padding: 20px;
+  width: 50%;
+  background-color: #f1f1f1;
+  height: 300px;
+}
+
+
+section:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+/* Responsive Design - die zwei Boxen übereinander ansatt nebeneinander ( auf kleinem Bildschrim) */
+@media (max-width: 600px) {
+  board_pile, board_stack {
+    width: 100%;
+    height: auto;
+  }
+}
+/* verschiedene Karten */
+button[type]{
+	border: none;
+	padding: 23px 21px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	background-color: white;
+}
+button[type=red]{
+	background: url('./pictures/red_51x69.png')
+}
+button[type=green]{
+	background: url('./pictures/green_51x69.png')
+}
+button[type=yellow]{
+	background: url('./pictures/yellow_51x69.png')
+}
+button[type=blue]{
+	background: url('./pictures/blue_51x69.png')
+}
+button[type=backside]{
+	padding: 35px 25px;
+	background: url('./pictures/backside_51x69.png')
+	
+}
+
+</style>
+
+
+</head>
+
+<body>
+
+<header>
+  <h2>Lisa Unogame</h2>
+</header>
+
+<section>
+<playerside>
+	<p>Stack of Computer</p>
+	<table id="computerstack">
+		<tr>
+			<td>Card 1</td>
+			<td>Card 2</td>
+			<td>Card 3</td>
+		</tr>
+	</table>
+</playerside>
+</section>
+
+<section>
+  <board_pile>
+	<h2 id="pile_text">Card Pile</h2>
+	<div id=pile_card></div>
+  </board_pile>
+  
+  <board_stack>
+	<h3 id="takeCard">Card Stack</h3>
+	<div id=stack></div>
+  </board_stack>
+</section>
+
+<section>
+<playerside>
+	<p id="playername">Stack of Player</p>
+	<table id="playerstack">
+		<tr>
+			<td>Card 1</td>
+			<td>Card 2</td>
+			<td>Card 3</td>
+		</tr>
+	</table>
+</playerside>
+
+</section>
+
+<footer>
+  <p>Lisa, Matrikelnr.: 262536</p>
+</footer>
+
+	<script src="UNOGame.js"></script>
+</body>
+</html>

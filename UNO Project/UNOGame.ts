@@ -1,10 +1,10 @@
 let amountOfCards: number = 5;
 
 let colors: string[] = [
-		"red", 
-		"green", 
-		"yellow", 
-		"blue",
+		"rot", 
+		"grün", 
+		"gelb", 
+		"blau",
 	];
 	
 enum gameState {
@@ -19,9 +19,7 @@ interface iCard {
 	color: string;
 }
 
-/*
- *  Stack Functions 
- */
+/* "Stack" Funktion - Ziehstapel*/
 let cardStack: iCard[] = [];
 
 function fillStack() {
@@ -29,7 +27,6 @@ function fillStack() {
 	for(let i=0; i< colors.length; i++){
 		for (let cardValue = 1; cardValue <=9; cardValue++){
 			nCard ={ value: cardValue.toString(), color: colors[i]};
-			//console.log(nCard)
 			cardStack.push(nCard);
 		}
 	}
@@ -50,14 +47,11 @@ function giveOutCards(){
 		userStack.push(cardStack.pop());
 		compStack.push(cardStack.pop());
 	}
-	//console.log(userStack)
-	//console.log(compStack)
+	
 }
 
 
-/*
- *  Pile Functions 
- */
+/* "Pile" - Funktion - Ablegestapel*/
 let cardPile: iCard[] = [];
 
 function checkTurn(card: iCard):boolean {
@@ -73,10 +67,10 @@ function checkTurn(card: iCard):boolean {
 function checkGameOver(){
 	if(userStack.length == 0){
 		state == gameState.Won;
-		alert("You Won! :)");
+		alert("Du hast gewonnen! :)");
 	} else if(compStack.length == 0){
 		state == gameState.Lost;
-		alert("You Lost! :(");
+		alert("Du hast verloren :(");
 	}
 }
 
@@ -84,9 +78,7 @@ function addCard_Pile(card: iCard){
 	cardPile.push(card);
 }
 
-/*
- *  Player/Computer Functions 
- */
+/*Player/Computer Funktion */
 
 let userStack: iCard[] = [];
 let compStack: iCard[] = [];
@@ -100,7 +92,7 @@ function removeCard(card: iCard, stack: iCard[]){
 }
 
 function playCard(card: iCard, stack: iCard[]){
-	console.log("Play Card:");
+	console.log("Spiele eine Karte:");
 	console.log(card);
 	removeCard(card, stack);
 	addCard_Pile(card);
@@ -132,7 +124,7 @@ function takeCard(stack: iCard[]){
 
 function computersTurn(){
 	if(state == gameState.ComputersDraw){
-		console.log("Computers Turn Began")
+		console.log("Der Computer ist dran!")
 		setTimeout(function() {
 			let cardIndex = compCheckCards();
 			console.log(cardIndex);
@@ -144,7 +136,7 @@ function computersTurn(){
 				let card = {value: compStack[cardIndex].value, color: compStack[cardIndex].color};
 				playCard(card, compStack);
 			}
-			console.log("Computers Turn Over");
+			console.log("Computer hat gespielt!");
 		}, 2000)
 	}
 
@@ -162,9 +154,7 @@ function compCheckCards():number {
 	return -1;
 }
 
-/*
- *  Game Functions
- */
+/* Spiel Funktion*/
 
 function printPlayerStack(){
 	let html: string = "";
@@ -215,7 +205,7 @@ function redrawBoard(){
 	printStack();
 }
 
-/* Button Functions */
+/* Button Funktion */
 function cardClicked(color: string, value: string){
 	if (state == gameState.PlayersDraw) {
 		let clCard = {color: color, value: value};
@@ -223,10 +213,10 @@ function cardClicked(color: string, value: string){
 			playCard(clCard, userStack);
 			computersTurn();
 		} else {
-			alert("You cant place this card");
+			alert("Du kannst diese Karte nicht legen");
 		}
 	} else {
-		alert("It's not your turn!");
+		alert("DU bist nicht dran!");
 	}
 	
 }
@@ -237,7 +227,7 @@ function cardStackClicked(){
 	}
 }
 
-/* Initialize */
+/* Initialisierung */
 fillStack();
 shuffleCards();
 giveOutCards();
